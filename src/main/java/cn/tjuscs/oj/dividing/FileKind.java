@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 
 import cn.tjuscs.oj.yh.compile;
-
+import cn.tjuscs.oj.yh.ExecuteLinuxCommand;
 /*
  * FileKind作为基类。
  */
@@ -77,7 +77,9 @@ public abstract class FileKind extends compile {
 				file.getParentFile().mkdirs();
 				file.createNewFile();
 			} else {
-				file.delete();
+				String s = file.getPath();
+				ExecuteLinuxCommand.execute("rm " + file.getPath());
+				//file.delete();
 				file.createNewFile();
 			}
 		} catch (IOException e) {
