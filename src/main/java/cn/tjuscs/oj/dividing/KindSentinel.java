@@ -99,97 +99,25 @@ public class KindSentinel extends FileKind {
 	
 	public String getResult(){
 		if (this.res.toString() != "")
-			return res.toString();
+			return res.toString().trim();
 		else
 			return "It is not Sentinel";
 	}
-	
-	
-//	@Override
-//	boolean splitFile() throws IOException {
-//		// TODO Auto-generated method stub
-//		
-//		File tmp = new File(sourceFilePath.trim());
-//		String fileName = tmp.getName();
-//		int dot = fileName.lastIndexOf('.');   
-//        if ((dot >-1) && (dot < (fileName.length()))) {   
-//            fileName = fileName.substring(0, dot);   
-//        }
-//		if(this.res.toString() == "")
-//			return false;
-//		
-//		String outFileName = this.targetFilePath + "\\sample1.out";
-//		String inFileName = this.targetFilePath + "\\sample1.in";
-//		File outFile = new File(outFileName);
-//		//File rightOutputFile = new File(outputFilePath);
-//		creatFile(outFile);
-//		
-//		
-//		RandomAccessFile sourceFileReader = new RandomAccessFile(new File(sourceFilePath), "rw");
-//		
-//		long prePtr = 0;
-//		long curPtr = 0;
-//		int index = 1;
-//		while(prePtr < sourceFileReader.length()){
-//			
-//			File inFile = new File(inFileName);
-//			creatFile(inFile);
-//			RandomAccessFile sampleInputFile = new RandomAccessFile(inFile, "rw");
-//			sourceFileReader.seek(0);
-//			while(sourceFileReader.getFilePointer() < prePtr){
-//				sampleInputFile.writeBytes(sourceFileReader.readLine().trim());
-//				sampleInputFile.writeBytes("\n");
-//			}
-//			do{
-//				sampleInputFile.writeBytes(sourceFileReader.readLine().trim());
-//				sampleInputFile.writeBytes("\n");
-//				String command = this.rightExePath + " < " + inFileName + " > " + outFileName;
-//				//System.out.println(command);
-//				//Runtime rn = Runtime.getRuntime();
-//				//rn.exec(command);
-//				ExecuteLinuxCommand.execute(command);
-//			}while(outFile.length()== prePtr 
-//					&& sourceFileReader.getFilePointer()<sourceFileReader.length());
-//			curPtr = sourceFileReader.getFilePointer();
-//			
-//			
-//			//String pathin = outputFilePath + fileName + "_" + index + ".in";
-//			
-//			
-//			String pathin = this.targetFilePath + "\\" + fileName + "_" + index + ".in";
-//			String pathout = this.targetFilePath + "\\" + fileName + "_" + index + ".out";
-//			File splitedFiles = new File(pathin);
-//			File outSplitedFiles = new File(pathout);
-//			
-//			if(!splitedFiles.getParentFile().exists()){
-//				splitedFiles.getParentFile().mkdir();
-//			}
-//			
-//			creatFile(splitedFiles);
-//			creatFile(outSplitedFiles);
-//			
-//			RandomAccessFile fileWriter = new RandomAccessFile(splitedFiles, "rw");
-//			sourceFileReader.seek(prePtr);
-//			while(sourceFileReader.getFilePointer() < curPtr){
-//				fileWriter.writeBytes(sourceFileReader.readLine().trim());
-//				fileWriter.writeBytes("\n");
-//			}
-//			fileWriter.writeBytes(res.toString());
-//			fileWriter.close();
-//			
-//			
-//			String command = this.rightExePath + " < " + pathin + " > " + pathout;
-//			ExecuteLinuxCommand.execute(command);
-//			
-//			index ++;
-//			prePtr = curPtr;
-//			sampleInputFile.close();
-//			
-//		}
-//		
-//		sourceFileReader.close();
-//		return true;
-//	}
+	public boolean isPrefix(File target, File source) throws IOException{
+		RandomAccessFile tf = new RandomAccessFile(target, "rw");
+		RandomAccessFile sf = new RandomAccessFile(source, "rw");
+		boolean flag = true;
+		while(tf.getFilePointer() < tf.length() && sf.getFilePointer() < tf.length()){
+			String s1 = tf.readLine().trim();
+			String s2 = sf.readLine().trim();
+			if(!s1.equals(s2)) {
+				flag = false;
+			}
+		}
+		tf.close();
+		sf.close();
+		return flag;
+	}
 	
 	@Override
 	boolean splitFile() throws IOException {
@@ -206,6 +134,7 @@ public class KindSentinel extends FileKind {
 		
 		long prePtr = 0;
 		long curPtr = 0;
+		long preLength = 0;
 		int index = 0;
 		while(prePtr < sourceFileReader.length()){
 			
@@ -225,14 +154,15 @@ public class KindSentinel extends FileKind {
 				//Runtime rn = Runtime.getRuntime();
 				//rn.exec(command);
 				ExecuteLinuxCommand.execute(command);
-			}while(outFile.length()== prePtr 
+			}while( !(outFile.length() > preLength && isPrefix(outFile, new File(outputFilePath)))
 					&& sourceFileReader.getFilePointer()<sourceFileReader.length());
+			if(sourceFileReader.getFilePointer() == sourceFileReader.length())
+				break;
 			curPtr = sourceFileReader.getFilePointer();
-			
+			preLength = outFile.length();
 			
 			//String pathin = outputFilePath + fileName + "_" + index + ".in";
-			
-			
+
 			String pathin = this.targetFilePath + "/" + this.pid + "_" + index + ".in";
 			String pathout = this.targetFilePath + "/" + this.pid + "_" + index + ".out";
 			File splitedFiles = new File(pathin);
@@ -261,7 +191,6 @@ public class KindSentinel extends FileKind {
 			index ++;
 			prePtr = curPtr;
 			sampleInputFile.close();
-			
 		}
 		
 		BufferedWriter num = new BufferedWriter(new FileWriter(this.targetFilePath + "/" + this.pid + "_total.txt"));
