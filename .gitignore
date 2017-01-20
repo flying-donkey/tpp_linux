@@ -227,3 +227,7 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+#idea projects
+.idea/
+*.iml
