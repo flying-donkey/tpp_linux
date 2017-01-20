@@ -102,7 +102,7 @@ public class rungcov {
 		outputBuffer.append("#Ver_# " + programName + '\n');
 		outputBuffer.append("#NOTS# " + caseNum + '\n');
 		List<String> executableLines = getExecutableLines(sourceDir
-				+ programName + "_1.cpp.gcov");
+				+ programName + "_0.cpp.gcov");
 		outputBuffer.append("#LOES# ");
 		for (String s : executableLines) {
 			outputBuffer.append(s + " ");

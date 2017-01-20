@@ -12,7 +12,7 @@ import java.util.List;
 import cn.tjuscs.oj.yh.ExecuteLinuxCommand;
 
 public class KindEOF extends FileKind{
-	public final int MAX_LINE = 100000;
+	public final int MAX_LINE = 1000000;
 	public String[] ipt = new String[MAX_LINE];
 	public String[] opt = new String[MAX_LINE];
 	public String[] tmp = new String[MAX_LINE];
@@ -57,6 +57,7 @@ public class KindEOF extends FileKind{
 		arg = ipt[0];
 		curInLen = 1;
 		for(int i=1;i<=IFLen;i++){
+			//System.out.println(i);
 			curOutLen = 0;
 			for(;curInLen<i;curInLen++){
 				arg = arg + "\n" + ipt[curInLen];
@@ -71,19 +72,26 @@ public class KindEOF extends FileKind{
 			
 			ExecuteLinuxCommand.execute(ExName+" < tempFile.in > tempFile.out" + "\n");
 //			Thread.sleep(1000);
+	/*
 			Character terminate;
 			terminate = 3;
 			ExecuteLinuxCommand.execute(terminate.toString());
+	*/		
 			BufferedReader getOut = new BufferedReader(new FileReader("tempFile.out"));
 			while( (tmp[curOutLen]=getOut.readLine()) != null ){
-				System.out.println(tmp[curOutLen]);
+				//System.out.println(tmp[curOutLen]);
 				curOutLen++;
 			}
 //			System.out.println(curOutLen);
 			if(curOutLen > prvOutLen && isprefix()){
-				fout = new BufferedWriter(new FileWriter(Split+FileIndex+".out"));
-				DonePaths.add(new String(Split+FileIndex+".out"));
+				//System.out.println(i);
+				String pathin = this.targetFilePath + "/" + this.pid + "_" + FileIndex + ".in";
+				String pathout = this.targetFilePath + "/" + this.pid + "_" + FileIndex + ".out";
+				fout = new BufferedWriter(new FileWriter(pathin));
+				System.out.println(pathin);
+				//DonePaths.add(new String(Split+FileIndex+".out"));
 				for(;prvInLen < curInLen;prvInLen++){
+					//System.out.println(prvInLen);
 					fout.write(ipt[prvInLen]);
 					fout.write("\n");
 					fout.flush();
@@ -91,6 +99,7 @@ public class KindEOF extends FileKind{
 				FileIndex++;
 				prvOutLen = curOutLen;
 				System.out.println("A file is created");
+				ExecuteLinuxCommand.execute(ExName+" < " + pathin + " > " + pathout + "\n");
 			}
 			getOut.close();
 		}
