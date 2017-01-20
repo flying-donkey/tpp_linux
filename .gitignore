@@ -231,3 +231,6 @@ pip-log.txt
 #idea projects
 .idea/
 *.iml
+
+#unuse data
+data/
