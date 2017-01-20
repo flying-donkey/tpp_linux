@@ -6,14 +6,13 @@ import java.io.IOException;
 public class index {
 
 	public static void main(String[] args) throws IOException{
-		
-		
+
 //		String temp = "./\\data";
 //		File test = new File(temp);
 //		System.out.println(test.getCanonicalPath());
 		// TODO Auto-generated method stub
 
-		String pid = new String("1065");
+		String pid = new String("1375");
 		String sid = new String("testid");
 		boolean result = dividing (pid, sid);
 		if(result == false)
@@ -28,9 +27,7 @@ public class index {
 		try {
 			KindT kindt = new KindT(pid, sid);
 			kind = kindt.judgeKind();
-			System.out.println("haha" + kind);
 			if(kind == kindt.T_Kind){
-				System.out.println("T");
 //				try{
 //					Thread.sleep(100000);
 //				}catch(Exception e){

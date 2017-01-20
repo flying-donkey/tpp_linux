@@ -45,7 +45,8 @@ public class ChangeFile{
 		try{
 			BufferedReader in = new BufferedReader(new FileReader(file_path));
 			BufferedWriter out = new BufferedWriter(new FileWriter(file_tmp + "_src.cpp"));
-			String s = "using namespace std;";
+//			String s = "using namespace std;";
+			String s = "";
 			out.write(s);
 			out.newLine();
 			while((s = in.readLine()) != null){
