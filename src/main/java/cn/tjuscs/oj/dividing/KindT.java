@@ -73,7 +73,7 @@ public class KindT extends FileKind {
 		// use the new input file to check answer
 		// if not right return
 		// get in to a file
-		ExecuteLinuxCommand.execute(this.rightExePath + " < " + changeFirstNumInput + " > " + changeFirstNumOutput);
+		ExecuteLinuxCommand.execute("timeout 2 " + this.rightExePath + " < " + changeFirstNumInput + " > " + changeFirstNumOutput);
 		BufferedReader newOBR = new BufferedReader(new FileReader(changeFirstNumOutput));
 		BufferedReader oldOBR = new BufferedReader(new FileReader(outputFilePath));
 		String news = null, olds = null;
