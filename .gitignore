@@ -234,3 +234,5 @@ pip-log.txt
 
 #unuse data
 data/
+*.in
+*.out
