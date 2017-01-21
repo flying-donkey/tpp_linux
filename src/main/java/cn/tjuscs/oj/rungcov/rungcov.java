@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 import cn.tjuscs.oj.cmdHelper.Compile;
 import com.ncfxy.FaultLocalization.FaultLocalization;
-import cn.tjuscs.oj.config.config;
+import cn.tjuscs.oj.config.Config;
 //import cn.tjuscs.oj.cmdHelper.ExecuteLinuxCommand;
 import cn.tjuscs.oj.cmdHelper.ExecuteLinuxCommand;
 import cn.tjuscs.oj.cmdHelper.JavaOperateFiles;
@@ -24,7 +24,7 @@ public class rungcov {
 	public static void main(String[] args) throws NumberFormatException,
 			IOException, SQLException {
 		rungcov r = new rungcov();
-		ResultSet res = config.getAllSubmitIdFromProblemId("2800");
+		ResultSet res = Config.getAllSubmitIdFromProblemId("2800");
 		res.next();
 		String sid = res.getString("sid");
 		r.runAndGetMat(sid, "2800");
@@ -45,17 +45,17 @@ public class rungcov {
 			throws NumberFormatException, IOException, SQLException {
 
 //		String workpath = new File("./").getCanonicalPath();
-		String workpath = config.getProjectPath();
+		String workpath = Config.getProjectPath();
 		System.out.println(workpath);
 //		String dataPath = "./data/toj_problem_" + pid;
 //		dataPath = new File(dataPath).getCanonicalPath();
-		String dataPath = config.getProblemBasePath(pid);
+		String dataPath = Config.getProblemBasePath(pid);
 		String casenumFileName = dataPath + "/splitedTestCases/" + pid
 				+ "_total.txt";
 		String inputFileName = dataPath + "/splitedTestCases/" + pid + "_";
 		String outputFileName = dataPath + "/splitedTestCases/output";
 //		String srcFileDir = dataPath + "/programs/commit_id_" + sid + "/";
-		String srcFileDir = config.getTestProblemPath(pid, sid);
+		String srcFileDir = Config.getTestProblemPath(pid, sid);
 		String srcFileName = dataPath + "/programs/commit_id_" + sid + "/"
 				+ sid;
 		String compileHelperPath = "sh " + workpath + "/" + "compile_helper.sh ";

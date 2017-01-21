@@ -15,7 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class config {
+public class Config {
     //All path is given like '/home/example';
     //this is means there is no '/' at the end of the path, important!
 
