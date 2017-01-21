@@ -11,9 +11,8 @@ import java.io.InputStreamReader;
 import java.sql.SQLException;
 //import cn.tjuscs.oj.cmdHelper.ExecuteLinuxCommand;
 import cn.tjuscs.oj.cmdHelper.ExecuteLinuxCommand;
-import cn.tjuscs.oj.config.config;
 
-public class KindT extends FileKind {
+public class cd KindT extends FileKind {
 	public final int MAX_LINE = 100000;
 	public String[] inputFileLines = new String[MAX_LINE];
 	public String[] outputFileLines = new String[MAX_LINE];
