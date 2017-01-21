@@ -2,24 +2,25 @@ package cn.tjuscs.oj.dividing;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class index {
 
-	public static void main(String[] args) throws IOException{
+	public static void main(String[] args) throws IOException, SQLException{
 
 //		String temp = "./\\data";
 //		File test = new File(temp);
 //		System.out.println(test.getCanonicalPath());
 		// TODO Auto-generated method stub
 
-		String pid = new String("1375");
+		String pid = new String("2800");
 		String sid = new String("testid");
 		boolean result = dividing (pid, sid);
 		if(result == false)
 			System.out.println("defeated");
 	}
 	
-	public static boolean dividing(String pid, String sid) throws IOException{
+	public static boolean dividing(String pid, String sid) throws IOException, SQLException{
 					
 		int kind;
 		
