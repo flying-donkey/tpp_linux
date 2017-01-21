@@ -8,8 +8,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 //import cn.tjuscs.oj.cmdHelper.ExecuteLinuxCommand;
-import cn.tjuscs.oj.yh.ExecuteLinuxCommand;
+import cn.tjuscs.oj.cmdHelper.ExecuteLinuxCommand;
+import cn.tjuscs.oj.config.config;
 
 public class KindT extends FileKind {
 	public final int MAX_LINE = 100000;
@@ -23,7 +25,7 @@ public class KindT extends FileKind {
 		// TODO Auto-generated constructor stub
 	}
 
-	public KindT(String pid, String sid) throws IOException {
+	public KindT(String pid, String sid) throws IOException, SQLException {
 		// TODO Auto-generated constructor stub
 		super(pid, sid);
 		ExecuteLinuxCommand.execute(this.rightExePath + " < " + this.sourceFilePath + " > " + this.outputFilePath);

@@ -3,14 +3,16 @@ package cn.tjuscs.oj.dividing;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.sql.SQLException;
 
-import cn.tjuscs.oj.yh.compile;
-import cn.tjuscs.oj.yh.ExecuteLinuxCommand;
+import cn.tjuscs.oj.cmdHelper.Compile;
+import cn.tjuscs.oj.cmdHelper.ExecuteLinuxCommand;
+import cn.tjuscs.oj.config.config;
 /*
  * FileKind作为基类。
  */
 
-public abstract class FileKind extends compile {
+public abstract class FileKind extends Compile {
 	protected String sourceFilePath; // 需要拆分的用例的源文件地址
 	protected String outputFilePath; // 正确的输出文件（.out文件）
 	protected String targetFilePath; // 拆分后的样例的存放地址
@@ -35,16 +37,20 @@ public abstract class FileKind extends compile {
 		this.res.append("");
 	}
 
-	public FileKind(String pid, String sid) throws IOException {
+	public FileKind(String pid, String sid) throws IOException, SQLException {
 		// TODO Auto-generated constructor stub
 		
 		//所有的文件目录都是一致的
 		//文件名中利用sid唯一确定program的地址。
-		this.sourceFilePath = new File("./data/toj_problem_" + pid + "/" + pid + ".in").getCanonicalPath();
-		this.outputFilePath = new File("./data/toj_problem_" + pid + "/" + pid + ".out").getCanonicalPath();
-		this.targetFilePath = new File("./data/toj_problem_" + pid + "/splitedTestCases").getCanonicalPath();
-		this.rightProPath = new File("./data/toj_problem_" + pid + "/programs/commit_id_" + sid + "/" + sid + ".src").getCanonicalPath();
-		//System.out.println("Second compile");
+//		this.sourceFilePath = new File("./data/toj_problem_" + pid + "/" + pid + ".in").getCanonicalPath();
+		this.sourceFilePath = config.getProblemInputFilePath(pid);
+//		this.outputFilePath = new File("./data/toj_problem_" + pid + "/" + pid + ".out").getCanonicalPath();
+		this.outputFilePath = config.getProblemOutPutFilePath(pid);
+//		this.targetFilePath = new File("./data/toj_problem_" + pid + "/splitedTestCases").getCanonicalPath();
+		this.targetFilePath = config.getProblemSplitedTestCasesPath(pid);
+//		this.rightProPath = new File("./data/toj_problem_" + pid + "/programs/commit_id_" + sid + "/" + sid + ".src").getCanonicalPath();
+		this.rightProPath = config.getRightProblemPath(pid, sid);
+		//System.out.println("Second Compile");
 		this.rightExePath = compile(this.rightProPath);
 		this.pid = pid;
 		this.res = new StringBuffer();
