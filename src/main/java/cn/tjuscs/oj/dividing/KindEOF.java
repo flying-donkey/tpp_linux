@@ -2,14 +2,14 @@ package cn.tjuscs.oj.dividing;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 //import cn.tjuscs.oj.cmdHelper.ExecuteLinuxCommand;
-import cn.tjuscs.oj.yh.ExecuteLinuxCommand;
+import cn.tjuscs.oj.cmdHelper.ExecuteLinuxCommand;
 
 public class KindEOF extends FileKind{
 	public final int MAX_LINE = 1000000;
@@ -26,7 +26,7 @@ public class KindEOF extends FileKind{
 		// TODO Auto-generated constructor stub
 	}
 
-	public KindEOF(String pid, String sid) throws IOException {
+	public KindEOF(String pid, String sid) throws IOException, SQLException {
 		// TODO Auto-generated constructor stub
 		super(pid, sid);
 	}

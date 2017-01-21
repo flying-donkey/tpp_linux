@@ -5,10 +5,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 //import cn.tjuscs.oj.cmdHelper.ExecuteLinuxCommand;
-import cn.tjuscs.oj.yh.ExecuteLinuxCommand;
+import cn.tjuscs.oj.cmdHelper.ExecuteLinuxCommand;
 
 
 public class KindSentinel extends FileKind {
@@ -20,7 +21,7 @@ public class KindSentinel extends FileKind {
 		// TODO Auto-generated constructor stub
 	}
 
-	public KindSentinel(String pid, String sid) throws IOException {
+	public KindSentinel(String pid, String sid) throws IOException, SQLException{
 		// TODO Auto-generated constructor stub
 		super(pid, sid);
 	}
