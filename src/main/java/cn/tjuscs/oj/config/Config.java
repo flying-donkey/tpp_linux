@@ -15,7 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class config {
+public class Config {
     //All path is given like '/home/example';
     //this is means there is no '/' at the end of the path, important!
 
@@ -25,12 +25,13 @@ public class config {
 //    }
 
     private static String getCodeSourcePath() throws IOException{
-//        return new File(getProjectPath()).getParent() + "/code";
-        return "/media/yunhao/喷水小火龙/tojdata/code/code";
+        return new File(getProjectPath()).getParent() + "/code";
+//        return "/media/moon/喷水小火龙/tojdata/code/code";
     }
 
     private static String getDataSourcePath() throws IOException{
         return new File(getProjectPath()).getParent() + "/data";
+//        return "/media/moon/喷水小火龙/tojdata/code/code";
     }
 
     public static String getProjectPath() throws IOException{

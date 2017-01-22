@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import cn.tjuscs.oj.cmdHelper.Compile;
 import cn.tjuscs.oj.cmdHelper.ExecuteLinuxCommand;
-import cn.tjuscs.oj.config.config;
+import cn.tjuscs.oj.config.Config;
 /*
  * FileKind作为基类。
  */
@@ -43,13 +43,13 @@ public abstract class FileKind extends Compile {
 		//所有的文件目录都是一致的
 		//文件名中利用sid唯一确定program的地址。
 //		this.sourceFilePath = new File("./data/toj_problem_" + pid + "/" + pid + ".in").getCanonicalPath();
-		this.sourceFilePath = config.getProblemInputFilePath(pid);
+		this.sourceFilePath = Config.getProblemInputFilePath(pid);
 //		this.outputFilePath = new File("./data/toj_problem_" + pid + "/" + pid + ".out").getCanonicalPath();
-		this.outputFilePath = config.getProblemOutPutFilePath(pid);
+		this.outputFilePath = Config.getProblemOutPutFilePath(pid);
 //		this.targetFilePath = new File("./data/toj_problem_" + pid + "/splitedTestCases").getCanonicalPath();
-		this.targetFilePath = config.getProblemSplitedTestCasesPath(pid);
+		this.targetFilePath = Config.getProblemSplitedTestCasesPath(pid);
 //		this.rightProPath = new File("./data/toj_problem_" + pid + "/programs/commit_id_" + sid + "/" + sid + ".src").getCanonicalPath();
-		this.rightProPath = config.getRightProblemPath(pid, sid);
+		this.rightProPath = Config.getRightProblemPath(pid, sid);
 		//System.out.println("Second Compile");
 		this.rightExePath = compile(this.rightProPath);
 		this.pid = pid;
