@@ -16,44 +16,46 @@ import java.sql.SQLException;
 
 
 public class Config {
-    //All path is given like '/home/example';
-    //this is means there is no '/' at the end of the path, important!
+    //所有的路径结尾都没有/,注意！
 
-//    public static void main (String[] args) throws IOException, SQLException{
-//        System.out.println(getProblemInputFilePath("1001"));
-//        getRightProblemPath("1001", "testid");
-//    }
-
+    //OJ系统的code路径
     private static String getCodeSourcePath() throws IOException{
         return new File(getProjectPath()).getParent() + "/code";
 //        return "/media/moon/喷水小火龙/tojdata/code/code";
     }
 
+    //OJ系统的data路径
     private static String getDataSourcePath() throws IOException{
         return new File(getProjectPath()).getParent() + "/data";
 //        return "/media/moon/喷水小火龙/tojdata/code/code";
     }
 
+    //项目的根目录
     public static String getProjectPath() throws IOException{
         return new File(System.getProperty("user.dir")).getCanonicalPath();
     }
 
+    //tpp_data路径，原项目中的data目录路径
     public static String getDataTargetPath() throws IOException{
         return new File(getProjectPath()).getParent() + "/tpp_data";
     }
 
+    //某一到题的.in文件路径即 tpp_data/toj_problem_1001/1001_0.in
     public static String getProblemInputFilePath(String pid) throws IOException{
         return checkProblemBasePath(pid) + "/" + pid + "_0.in";
     }
 
+    //某一道题的.out文件路径 tpp_data/toj_problem_1001/1001.out
     public static String getProblemOutPutFilePath(String pid) throws IOException{
         return checkProblemBasePath(pid) + "/" + pid + "_0.out";
     }
 
+    //某一道题的splitedTestCases文件夹路径 tpp_data/toj_problem_1001/splitedTestCases
     public static String getProblemSplitedTestCasesPath(String pid) throws IOException{
         return checkProblemBasePath(pid) + "/splitedTestCases";
     }
 
+    //某一道题的正确代码的路径 tpp_data/toj_problem_1001/programs/commit_id_testid/testid.src
     public static String getRightProblemPath(String pid, String sid) throws IOException, SQLException{
         String srcRightProgram = checkProblemBasePath(pid) + "/programs/commit_id_" + sid;
         if(!isDirectoryExist(srcRightProgram)){
@@ -70,20 +72,24 @@ public class Config {
         return srcRightProgram;
     }
 
+    //某一道题的基目录 tpp_data/toj_problem_1001
     public static String getProblemBasePath(String pid) throws IOException{
         return checkProblemBasePath(pid);
     }
 
+    //根据uid从数据库中查询所有的sid信息以及对应的提交结果(AC,WA,etc)
     public static ResultSet getAllSubmitIdFromProblemId(String pid) throws IOException, SQLException {
         DB db = new DB("sonar", "sonar", "acmdata");
         return db.query("SELECT sid, result FROM submit where pid=" + pid);
     }
 
+    //根据sid从数据库中查询对应的pid以及对应的提交结果(AC,WA,etc)
     public static ResultSet getProblemIdFromSubmitId(String sid) throws IOException, SQLException {
         DB db = new DB("sonar", "sonar", "acmdata");
         return db.query("SELECT pid, result FROM submit where sid=" + sid);
     }
 
+    //某个题目的提交的路径 tpp_data/toj_problem_1001/programs/commit_id_123456/123456.src
     public static String getTestProblemPath(String pid, String sid) throws IOException, SQLException{
         String srcTestProgram = checkProblemBasePath(pid) + "/programs/commit_id_" + sid;
         if(!isDirectoryExist(srcTestProgram)){
