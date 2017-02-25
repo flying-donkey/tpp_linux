@@ -6,15 +6,13 @@ import java.sql.SQLException;
 
 public class index {
 
-	public static void main(String[] args) throws IOException, SQLException{
+	public static void mainProcess(String pid, String sid) throws IOException, SQLException{
 
 //		String temp = "./\\data";
 //		File test = new File(temp);
 //		System.out.println(test.getCanonicalPath());
 		// TODO Auto-generated method stub
 
-		String pid = new String("2800");
-		String sid = new String("testid");
 		boolean result = dividing (pid, sid);
 		if(result == false)
 			System.out.println("defeated");
