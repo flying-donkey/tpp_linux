@@ -124,9 +124,11 @@ public class Config {
                 int num = 0;
                 String tarInputFile = getDataTargetPath() + "/toj_problem_" + pid + "/" + pid + "_";
                 //依次读取pid文件夹下的所有文件，并拷贝到tpp_data目录下
-                for (File item : flist){
-                    ExecuteLinuxCommand.execute("cp " + item.getCanonicalPath() + " " + tarInputFile + num + ".in");
-                    num++;
+                if(flist != null){
+                    for (File item : flist){
+                        ExecuteLinuxCommand.execute("cp " + item.getCanonicalPath() + " " + tarInputFile + num + ".in");
+                        num++;
+                    }
                 }
             }
         }
