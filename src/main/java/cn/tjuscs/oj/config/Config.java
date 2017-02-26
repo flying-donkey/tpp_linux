@@ -40,6 +40,10 @@ public class Config {
         return new File(getProjectPath()).getParent() + "/tpp_data";
     }
 
+    public static String getTempPath() throws IOException{
+        return new File(getProjectPath()).getParent() + "/tpp_temp";
+    }
+
     //某一到题的.in文件路径即 tpp_data/toj_problem_1001/1001_0.in
     public static String getProblemInputFilePath(String pid) throws IOException{
         return checkProblemBasePath(pid) + "/" + pid + "_0.in";
