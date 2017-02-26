@@ -24,7 +24,9 @@ public class Main {
         ResultSet res = Config.getAllSubmitIdFromProblemId(pid);
         res.next();
         String sid = res.getString("sid");
-        List<Integer> ret = rungcov.mainProcess(pid, sid);
+//        List<Integer> ret = rungcov.mainProcess(pid, "155222");
+        List<Integer> ret = rungcov.mainProcess(pid, "155281");
+
         //patch
         Integer totCases = ret.get(0);
         Integer passedCases = ret.get(1);
