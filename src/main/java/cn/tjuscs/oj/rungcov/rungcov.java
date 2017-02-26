@@ -63,9 +63,9 @@ public class rungcov {
 		fin.close();
 
 		// 编译文件，使用-ftest-coverage -fprofile-arcs参数
-		Compile.compile(dataPath + "/programs/commit_id_" + sid + "/" + sid + ".src", dataPath + "/programs/commit_id_" + sid, true, "-ftest-coverage -fprofile-arcs");
-		ExecuteLinuxCommand.execute("mv " + dataPath + "/programs/commit_id_" + sid + "/" + sid + " " + dataPath + "/programs/commit_id_" + sid + "/" + sid + ".exe");
-		ExecuteLinuxCommand.execute("mv " + dataPath + "/programs/commit_id_" + sid + "/" + sid + "_src.cpp " + dataPath + "/programs/commit_id_" + sid + "/" + sid + ".cpp");
+		//Compile.compile(dataPath + "/programs/commit_id_" + sid + "/" + sid + ".src", dataPath + "/programs/commit_id_" + sid, true, "-ftest-coverage -fprofile-arcs");
+		//ExecuteLinuxCommand.execute("mv " + dataPath + "/programs/commit_id_" + sid + "/" + sid + " " + dataPath + "/programs/commit_id_" + sid + "/" + sid + ".exe");
+		//ExecuteLinuxCommand.execute("mv " + dataPath + "/programs/commit_id_" + sid + "/" + sid + "_src.cpp " + dataPath + "/programs/commit_id_" + sid + "/" + sid + ".cpp");
 		ExecuteLinuxCommand.execute(compileHelperPath
 				+ (dataPath + "/programs/commit_id_" + sid) + " " + sid
 				+ " g++");
