@@ -62,9 +62,8 @@ public class rungcov {
 		retVal.add(casenum);
 		fin.close();
 
-		// 编译文件，使用-ftest-coverage -fprofile-arcs参数
-		Compile.compile(dataPath + "/programs/commit_id_" + sid + "/" + sid + ".src", dataPath + "/programs/commit_id_" + sid, true, "-ftest-coverage -fprofile-arcs");
-		ExecuteLinuxCommand.execute("mv " + dataPath + "/programs/commit_id_" + sid + "/" + sid + " " + dataPath + "/programs/commit_id_" + sid + "/" + sid + ".exe");
+		// 编译文件
+		Compile.compile(dataPath + "/programs/commit_id_" + sid + "/" + sid + ".src", dataPath + "/programs/commit_id_" + sid);
 		ExecuteLinuxCommand.execute("mv " + dataPath + "/programs/commit_id_" + sid + "/" + sid + "_src.cpp " + dataPath + "/programs/commit_id_" + sid + "/" + sid + ".cpp");
 		ExecuteLinuxCommand.execute(compileHelperPath
 				+ (dataPath + "/programs/commit_id_" + sid) + " " + sid

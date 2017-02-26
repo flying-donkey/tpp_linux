@@ -10,13 +10,14 @@ import java.util.List;
 
 //import cn.tjuscs.oj.cmdHelper.ExecuteLinuxCommand;
 import cn.tjuscs.oj.cmdHelper.ExecuteLinuxCommand;
+import cn.tjuscs.oj.config.Config;
 
 public class KindEOF extends FileKind{
 	public final int MAX_LINE = 1000000;
 	public String[] ipt = new String[MAX_LINE];
 	public String[] opt = new String[MAX_LINE];
 	public String[] tmp = new String[MAX_LINE];
-	public String tmpFileName = "tempFile.in";
+	public String tmpFileName;
 	public String Split = "split";
 	public int IFLen,OFLen,curInLen,curOutLen,prvInLen,prvOutLen,FileIndex;
 	public List<String> DonePaths;
@@ -62,22 +63,21 @@ public class KindEOF extends FileKind{
 			for(;curInLen<i;curInLen++){
 				arg = arg + "\n" + ipt[curInLen];
 			}
-			
+			tmpFileName = Config.getTempPath() + "/tempFile.in";
 			BufferedWriter fout = new BufferedWriter(new FileWriter(tmpFileName));
 			fout.write(arg);
 			fout.flush();
 			fout.close();
-			fout = new BufferedWriter(new FileWriter("tempFile.out"));
+			fout = new BufferedWriter(new FileWriter(Config.getTempPath() + "/tempFile.out"));
 			fout.close();
-			
-			ExecuteLinuxCommand.execute(ExName+" < tempFile.in > tempFile.out" + "\n");
+			ExecuteLinuxCommand.execute(ExName+" < " + tmpFileName + " > " + Config.getTempPath() + "/tempFile.out" + "\n");
 //			Thread.sleep(1000);
 	/*
 			Character terminate;
 			terminate = 3;
 			ExecuteLinuxCommand.execute(terminate.toString());
 	*/		
-			BufferedReader getOut = new BufferedReader(new FileReader("tempFile.out"));
+			BufferedReader getOut = new BufferedReader(new FileReader(Config.getTempPath() + "/tempFile.out"));
 			while( (tmp[curOutLen]=getOut.readLine()) != null ){
 				//System.out.println(tmp[curOutLen]);
 				curOutLen++;
