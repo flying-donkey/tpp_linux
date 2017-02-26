@@ -16,7 +16,7 @@ public class KindEOF extends FileKind{
 	public String[] ipt = new String[MAX_LINE];
 	public String[] opt = new String[MAX_LINE];
 	public String[] tmp = new String[MAX_LINE];
-	public String tmpFileName = "tempFile.in";
+	public String tmpFileName = "../tpp_temp/tempFile.in";
 	public String Split = "split";
 	public int IFLen,OFLen,curInLen,curOutLen,prvInLen,prvOutLen,FileIndex;
 	public List<String> DonePaths;
@@ -67,17 +67,16 @@ public class KindEOF extends FileKind{
 			fout.write(arg);
 			fout.flush();
 			fout.close();
-			fout = new BufferedWriter(new FileWriter("tempFile.out"));
+			fout = new BufferedWriter(new FileWriter("../tpp_temp/tempFile.out"));
 			fout.close();
-			
-			ExecuteLinuxCommand.execute(ExName+" < tempFile.in > tempFile.out" + "\n");
+			ExecuteLinuxCommand.execute(ExName+" < ../tpp_temp/tempFile.in > ../tpp_temp/tempFile.out" + "\n");
 //			Thread.sleep(1000);
 	/*
 			Character terminate;
 			terminate = 3;
 			ExecuteLinuxCommand.execute(terminate.toString());
 	*/		
-			BufferedReader getOut = new BufferedReader(new FileReader("tempFile.out"));
+			BufferedReader getOut = new BufferedReader(new FileReader("../tpp_temp/tempFile.out"));
 			while( (tmp[curOutLen]=getOut.readLine()) != null ){
 				//System.out.println(tmp[curOutLen]);
 				curOutLen++;
