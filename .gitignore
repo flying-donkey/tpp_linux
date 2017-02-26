@@ -236,3 +236,7 @@ pip-log.txt
 data/
 *.in
 *.out
+
+# when pake a jar
+out/
+src/META-INF/
