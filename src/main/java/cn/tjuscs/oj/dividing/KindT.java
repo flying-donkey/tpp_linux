@@ -155,7 +155,10 @@ public class KindT extends FileKind {
 		}
 		BufferedWriter num = new BufferedWriter(new FileWriter(this.targetFilePath + "/" + this.pid + "_total.txt"));
 		System.out.println(FileIndex);
-		num.write(String.valueOf(FileIndex));
+		if(FileIndex <= 50)
+			num.write(String.valueOf(FileIndex));
+		else
+			num.write(String.valueOf(50));
 		num.flush();
 		num.close();
 		

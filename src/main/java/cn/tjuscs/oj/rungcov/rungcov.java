@@ -1,11 +1,6 @@
 package cn.tjuscs.oj.rungcov;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -84,8 +79,10 @@ public class rungcov {
 		}
 		List<Integer> testResult = compareAndCombine((dataPath
 				+ "/splitedTestCases/" + pid), (outputFileName), casenum);
-		retVal.add(getMatrixFromGcov(srcFileDir, sid, casenum, testResult));
-		return retVal;
+//		retVal.add(getMatrixFromGcov(srcFileDir, sid, casenum, testResult));
+//		return retVal;
+		List<Integer> sus = getMatrixFromGcov(srcFileDir, sid, casenum, testResult);
+		return sus;
 	}
 
 	/**
@@ -98,7 +95,7 @@ public class rungcov {
 	 * @throws IOException
 	 * @since TOJ_Plus_Plus　Ver 1.0-SNAPSHOT
 	 */
-	private Integer getMatrixFromGcov(String sourceDir, String programName,
+	private List<Integer> getMatrixFromGcov(String sourceDir, String programName,
 			int caseNum, List<Integer> testResult) throws IOException {
 		// programName 使用sid
 		Integer passedCasesNum = 0;
@@ -149,7 +146,8 @@ public class rungcov {
 		List<Integer> sus = localization.getSuspiciousList();
 		System.out.println("代码行的可疑值排序为:");
 		System.out.println(sus.toString());
-		return passedCasesNum;
+//		return passedCasesNum;
+		return sus;
 	}
 
 	/**

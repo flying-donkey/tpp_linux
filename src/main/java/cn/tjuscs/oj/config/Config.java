@@ -93,7 +93,7 @@ public class Config {
         return db.query("SELECT pid, result FROM submit where sid=" + sid);
     }
 
-    //某个题目的提交的路径 tpp_data/toj_problem_1001/programs/commit_id_123456/123456.src
+    //某个题目的提交的路径 tpp_data/toj_problem_1001/programs/commit_id_123456/
     public static String getTestProblemPath(String pid, String sid) throws IOException, SQLException{
         String srcTestProgram = checkProblemBasePath(pid) + "/programs/commit_id_" + sid;
         if(!isDirectoryExist(srcTestProgram)){
